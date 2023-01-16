@@ -4,7 +4,6 @@ from app.api.netcdfs import router as netcdf
 
 app = FastAPI()
 
-
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
