@@ -1,6 +1,4 @@
 import app.api.netcdfs
-import pytest
-
 
 longitude = -8.33
 latitude = 43.46

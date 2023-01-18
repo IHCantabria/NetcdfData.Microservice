@@ -1,8 +1,6 @@
 # create test for get_data_from_point
 from app.processing.netcdfs_processing import get_netcdf_from_point
 import pytest
-import decimal
-
 
 longitude = -8.33
 latitude = 43.46
