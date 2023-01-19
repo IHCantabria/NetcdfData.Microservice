@@ -3,5 +3,5 @@
 :caption: CONTENTS
 :maxdepth: 3
 
-autoapi/index.rst
+autoapi/app/api/index.rst
 ```
