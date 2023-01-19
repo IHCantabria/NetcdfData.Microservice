@@ -41,8 +41,12 @@ jobs:
       - name: Install xmllint
         run: sudo apt-get install -y sphinx
 
+      - name: setup directories
+        shell: bash
+        run: mkdir /tmp/docs
+
       - name: Build doc html
-        run: sphinx-build -W --keep-going docs/ docs/_build/html
+        run: sphinx-build -W --keep-going /tmp/docs/ /tmp/docs/_build/html
 
       # - name: Prompt directory tree
       #   run: tree --dirsfirst -L 3 -P "*.py|*.md|*.toml|*.yml|*.yaml|*.ipynb|index.html"
