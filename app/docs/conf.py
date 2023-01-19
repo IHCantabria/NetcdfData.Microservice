@@ -42,4 +42,4 @@ autoapi_dirs = ["../../app"]
 autoapi_ignore = ["*/test_*.py"]
 # autoapi_add_toctree_entry = False
 
-master_doc = 'index'
+root_doc = 'index'
