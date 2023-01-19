@@ -1,7 +1,7 @@
 [project]
 name = "NetcdfMicroservice"
 requires-python = ">=3.7"
-version = 0.1.0
+version = "0.1.0"
 
 [project.optional-dependencies]
 dev = ["black", "sphinx", "coverage[toml]", "myst-nb", "sphinx-autoapi", "sphinx_rtd_theme"]
