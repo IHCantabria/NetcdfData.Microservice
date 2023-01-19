@@ -12,6 +12,8 @@ copyright = "2023, Marco Antonio Vega Marichalar"
 author = "Marco Antonio Vega Marichalar"
 release = __version__
 
+master_doc = 'index'
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
