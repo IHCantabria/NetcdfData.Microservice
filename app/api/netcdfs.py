@@ -15,14 +15,14 @@ def get_netcdf_from_point(
     """_summary_
 
     Args:
-        longitude (float): _description_
-        latitude (float): _description_
-        filepath (str): _description_
-        start_date (str): _description_
-        end_date (str): _description_
+        longitude (float): Longitude of the point
+        latitude (float): Latitude of the point
+        filepath (str): Filepath of the netcdf file
+        start_date (str): Start date of the data
+        end_date (str): End date of the data
 
     Returns:
-        _type_: _description_
+        _type_: Netcdf file
     """
     ds = get_netcdf(longitude, latitude, filepath, start_date, end_date)
     unique_filename = str(uuid.uuid4())

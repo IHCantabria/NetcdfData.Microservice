@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "pyTESEO"
+project = "NetcdfData Microservice"
 copyright = "2023, Marco Antonio Vega Marichalar"
 author = "Marco Antonio Vega Marichalar"
 release = "0.1.0"
@@ -36,6 +36,6 @@ html_title = project + " v" + release
 
 # -- Options for autoapi ext -------------------------------------------------
 
-autoapi_modules = {"app": None}
-autoapi_dirs = ["../app"]
+autoapi_modules = {"app/api": None}
+autoapi_dirs = ["../app/api"]
 autoapi_ignore = ["*/test_*.py"]
