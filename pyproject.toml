@@ -1,5 +1,5 @@
 [project]
-name = "Netcdf Microservice"
+name = "NetcdfMicroservice"
 
 [project.optional-dependencies]
 dev = ["black", "sphinx", "coverage[toml]", "myst-nb", "sphinx-autoapi", "sphinx_rtd_theme"]
