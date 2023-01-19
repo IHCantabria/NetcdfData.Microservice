@@ -38,6 +38,6 @@ html_title = project + " v" + release
 # -- Options for autoapi ext -------------------------------------------------
 
 autoapi_modules = {"app": None}
-autoapi_dirs = ["app"]
+autoapi_dirs = ["../../app"]
 autoapi_ignore = ["*/test_*.py"]
 # autoapi_add_toctree_entry = False
