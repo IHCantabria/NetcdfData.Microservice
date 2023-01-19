@@ -5,12 +5,11 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-from app.__init__ import __version__
 
 project = "pyTESEO"
 copyright = "2023, Marco Antonio Vega Marichalar"
 author = "Marco Antonio Vega Marichalar"
-release = __version__
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -40,4 +39,3 @@ html_title = project + " v" + release
 autoapi_modules = {"docs": None}
 autoapi_dirs = ["../docs"]
 autoapi_ignore = ["*/test_*.py"]
-autoapi_add_toctree_entry = True
