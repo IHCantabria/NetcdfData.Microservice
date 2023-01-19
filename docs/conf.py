@@ -40,4 +40,4 @@ html_title = project + " v" + release
 autoapi_modules = {"docs": None}
 autoapi_dirs = ["../docs"]
 autoapi_ignore = ["*/test_*.py"]
-# autoapi_add_toctree_entry = False
+autoapi_add_toctree_entry = True
