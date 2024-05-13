@@ -2,7 +2,7 @@ import app.api.netcdfs
 
 longitude = -8.33
 latitude = 43.46
-filepath = "tests/data/get_data_from_point_single_file"
+filepath = "tests/data/get_data_from_point_single_file/"
 start_date = "2023-01-08"
 end_date = "2023-01-11"
 
