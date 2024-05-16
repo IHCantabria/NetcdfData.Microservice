@@ -1,32 +1,17 @@
 import os
 import xarray as xr
 import geopandas
-import rioxarray
 from shapely.geometry import mapping
 import fiona
-import requests
-import pandas as pd
-import numpy as np
 
 
-def get_filepath_from_indicator_id(indicator_id) :
-    request_id = requests.get("https://datahubdes.ihcantabria.com/v1/public/Products").json()
-    for i in range(0,468) :
-        if request_id[i]["id"] == indicator_id :
-            path = request_id[i]["urlBase"] + request_id[i]["urlXmlLatest"]
-            data = pd.read_xml(path)
-            ncdf_URL = data["urlPath"][1]
-            ncdf_URL = "https://ihthreddsdev.ihcantabria.com" + "/thredds/dodsC/" + ncdf_URL
-            print(ncdf_URL)
-    return ncdf_URL
-
-def get_netcdf_from_point(longitude: float, latitude: float, indicator_id : int, start_date: str, end_date: str):
+def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str, end_date: str):
     """_summary_
 
     Args:
         longitude (float): Longitude of the point
         latitude (float): Latitude of the point
-        indicator_id (int): Indicator of the netcdf file
+        path (int): Path of the netcdf files
         start_date (str): Start date of the data
         end_date (str): End date of the data
 
@@ -34,15 +19,11 @@ def get_netcdf_from_point(longitude: float, latitude: float, indicator_id : int,
         _type_: xarray dataset
     """
     
-    try : 
-        files = os.listdir(indicator_id)
-        if len(files) >1:
-            ds = xr.open_mfdataset("{0}*.nc".format(indicator_id), concat_dim="time", combine='nested', engine="netcdf4")
-        else:
-            ds = xr.open_dataset("{0}{1}".format(indicator_id, files[0]), engine="netcdf4")
-    except :
-        filepath = get_filepath_from_indicator_id(indicator_id)
-        ds = xr.open_dataset(filepath)
+    files = os.listdir(path)
+    if len(files) >1:
+        ds = xr.open_mfdataset("{0}*.nc".format(path), concat_dim="time", combine='nested', engine="netcdf4")
+    else:
+        ds = xr.open_dataset("{0}{1}".format(path, files[0]), engine="netcdf4")
 
     try :
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
@@ -57,7 +38,7 @@ def get_netcdf_from_point(longitude: float, latitude: float, indicator_id : int,
 
 
 
-def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, indicator_id: int, start_date: str, end_date: str):
+def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str, end_date: str):
     """_summary_
 
     Args:
@@ -65,7 +46,7 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
         longitude_max (float): Maximum longitude of the area
         latitude_min (float): Minimum latitude of the area
         latitude_max (float): Maximum latitude of the area
-        indicator_id (int): Indicator of the netcdf file
+        path (int): Path of the netcdf files
         start_date (str): Start date of the data
         end_date (str): End date of the data
 
@@ -73,15 +54,11 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
         _type_: xarray dataset
     """
     
-    try : 
-        files = os.listdir(indicator_id)
-        if len(files) >1:
-            ds = xr.open_mfdataset("{0}*.nc".format(indicator_id), concat_dim="time", combine='nested', engine="netcdf4")
-        else:
-            ds = xr.open_dataset("{0}{1}".format(indicator_id, files[0]), engine="netcdf4")
-    except :
-        filepath = get_filepath_from_indicator_id(indicator_id)
-        ds = xr.open_dataset(filepath)
+    files = os.listdir(path)
+    if len(files) >1:
+        ds = xr.open_mfdataset("{0}*.nc".format(path), concat_dim="time", combine='nested', engine="netcdf4")
+    else:
+        ds = xr.open_dataset("{0}{1}".format(path, files[0]), engine="netcdf4")
     try :
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
     except:
@@ -96,14 +73,12 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
     return ds
 
 
-
-
-def get_netcdf_from_mask(filepath_mask : str, indicator_id : int, row_ID = None, start_date = None, end_date = None) :
+def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_date = None, end_date = None) :
     """_summary_
 
     Args:
         filepath_mask (str): Filepath of the mask file
-        indicator_id (int): Indicator of the netcdf file
+        path (int): Path of the netcdf files
         start_date (str): Start date of the data
         end_date (str): End date of the data
         row_ID (int): ID of the desired mask
@@ -111,15 +86,11 @@ def get_netcdf_from_mask(filepath_mask : str, indicator_id : int, row_ID = None,
         _type_: xarray dataset
     """
     
-    try :
-        files = os.listdir(indicator_id)
-        if len(files) >1:
-            ds = xr.open_mfdataset("{0}*.nc".format(indicator_id), concat_dim="time", combine='nested', engine="netcdf4", drop_variables=["DATA_spatially_aggregated", "latitude_bounds", "longitude_bounds", "spatial_aggregation_region_id", "climatology_bounds"])
-        else:
-            ds = xr.open_dataset("{0}{1}".format(indicator_id, files[0]), engine="netcdf4", drop_variables="DATA_spatially_aggregated")
-    except :
-        filepath_netcdf = get_filepath_from_indicator_id(indicator_id)
-        ds = xr.open_dataset(filepath_netcdf)
+    files = os.listdir(path)
+    if len(files) >1:
+        ds = xr.open_mfdataset("{0}*.nc".format(path), concat_dim="time", combine='nested', engine="netcdf4", drop_variables=["DATA_spatially_aggregated", "latitude_bounds", "longitude_bounds", "spatial_aggregation_region_id", "climatology_bounds"])
+    else:
+        ds = xr.open_dataset("{0}{1}".format(path, files[0]), engine="netcdf4", drop_variables="DATA_spatially_aggregated")
     if row_ID != None :
         mask = fiona.open(filepath_mask)
         mask = geopandas.GeoDataFrame.from_features([mask[int(row_ID)]])

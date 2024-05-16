@@ -2,13 +2,19 @@ import app.api.netcdfs
 
 longitude = -8.33
 latitude = 43.46
-indicator_id = "tests/data/get_data_from_point_single_file/"
+product_id = 137
 start_date = "2023-01-08"
 end_date = "2023-01-11"
 
-def test_get_netcdf_from_point():
+def test_get_netcdf_from_point_error():
     response = app.api.netcdfs.get_netcdf_from_point(
-        indicator_id, longitude, latitude, start_date, end_date
+        product_id, longitude, latitude, start_date, end_date
+    )
+    assert response.status_code == 404
+
+def test_get_netcdf_from_point_correct():
+    response = app.api.netcdfs.get_netcdf_from_point(
+        product_id, longitude, latitude, start_date, end_date
     )
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/x-netcdf"

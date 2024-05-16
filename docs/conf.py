@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "NetcdfData Microservice"
-copyright = "2023, Marco Antonio Vega Marichalar"
-author = "Marco Antonio Vega Marichalar"
+copyright = "2023, IHCantabria"
+author = "IHCantabria"
 release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
