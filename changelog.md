@@ -1,3 +1,10 @@
+** v0.2.0
+
+- Se añade el recorte por area.
+- Se añade el recorte por coordenadas.
+- Se añade el recorte por máscara.
+- Se conecta a la api de datahub.
+
 ** v0.1.0
 
 - Estructura de carpetas del microservicio.
