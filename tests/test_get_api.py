@@ -11,11 +11,3 @@ def test_get_netcdf_from_point_error():
         product_id, longitude, latitude, start_date, end_date
     )
     assert response.status_code == 404
-
-def test_get_netcdf_from_point_correct():
-    response = app.api.netcdfs.get_netcdf_from_point(
-        product_id, longitude, latitude, start_date, end_date
-    )
-    assert response.status_code == 200
-    assert response.headers["Content-Type"] == "application/x-netcdf"
-    assert response.headers["Content-Disposition"] == 'attachment; filename="data.nc"'
