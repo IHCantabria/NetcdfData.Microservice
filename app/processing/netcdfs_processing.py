@@ -7,15 +7,15 @@ import fiona
 
 def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str, end_date: str):
     """_summary_
-    Get time series data from a point
-    Args:
+    Returns the netcdf file from a point
+    :Args:
         longitude (float): Longitude of the point
         latitude (float): Latitude of the point
         path (int): Path of the netcdf files
         start_date (str): Start date of the data
         end_date (str): End date of the data
 
-    Returns:
+    :Returns:
         _type_: xarray dataset
     """
     
@@ -40,8 +40,8 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
 
 def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str, end_date: str):
     """_summary_
-    Get time series data from an area
-    Args:
+    Returns the netcdf file from an area
+    :Args:
         longitude_min (float): Minimum longitude of the area
         longitude_max (float): Maximum longitude of the area
         latitude_min (float): Minimum latitude of the area
@@ -50,7 +50,7 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
         start_date (str): Start date of the data
         end_date (str): End date of the data
 
-    Returns:
+    :Returns:
         _type_: xarray dataset
     """
     
@@ -75,14 +75,14 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
 
 def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_date = None, end_date = None) :
     """_summary_
-    Get time series data from a mask
-    Args:
+    Returns the netcdf file from a mask
+    :Args:
         filepath_mask (str): Filepath of the mask file
         path (int): Path of the netcdf files
         start_date (str): Start date of the data
         end_date (str): End date of the data
         row_ID (int): ID of the desired mask
-    Returns:
+    :Returns:
         _type_: xarray dataset
     """
     
