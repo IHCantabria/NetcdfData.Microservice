@@ -7,7 +7,7 @@ import fiona
 
 def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str, end_date: str):
     """_summary_
-
+    Get time series data from a point
     Args:
         longitude (float): Longitude of the point
         latitude (float): Latitude of the point
@@ -40,7 +40,7 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
 
 def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str, end_date: str):
     """_summary_
-
+    Get time series data from an area
     Args:
         longitude_min (float): Minimum longitude of the area
         longitude_max (float): Maximum longitude of the area
@@ -75,7 +75,7 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
 
 def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_date = None, end_date = None) :
     """_summary_
-
+    Get time series data from a mask
     Args:
         filepath_mask (str): Filepath of the mask file
         path (int): Path of the netcdf files
@@ -92,8 +92,8 @@ def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_d
     else:
         ds = xr.open_dataset("{0}{1}".format(path, files[0]), engine="netcdf4", drop_variables="DATA_spatially_aggregated")
     if row_ID != None :
-        mask = fiona.open(filepath_mask)
-        mask = geopandas.GeoDataFrame.from_features([mask[int(row_ID)]])
+        mask = fiona.open(filepath_mask, crs="epsg:4326")
+        mask = geopandas.GeoDataFrame.from_features([mask[int(row_ID)]], crs=mask.crs)
     else :
         mask = geopandas.read_file(filepath_mask, crs="epsg:4326")
     try :
