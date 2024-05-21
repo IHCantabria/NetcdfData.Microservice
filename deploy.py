@@ -54,16 +54,22 @@ if args.patch:
 
     version = ".".join(version)
 
+# Create a new tag with the new version
+
+import os
+
+# Check if there are any changes in the repository
+
+if os.system("git diff-index --quiet HEAD --") != 0:
+    print("There are changes in the repository. Please commit them before deploying.")
+    exit(1)
+
 # Write new version to pyproject.toml
 
 config["project"]["version"] = version
 
 with open("pyproject.toml", "w") as f:
     toml.dump(config, f)
-
-# Create a new tag with the new version
-
-import os
 
 os.system("git add pyproject.toml")
 
