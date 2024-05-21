@@ -1,4 +1,4 @@
-from . import __version__
+import toml
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -8,10 +8,17 @@ from . import __version__
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+# Read version from pyproject.toml
+
+with open("pyproject.toml") as f:
+    config = toml.load(f)
+
+version = config["project"]["version"]
+
 project = "NetcdfData Microservice"
 copyright = "2024, IHCantabria"
 author = "IHCantabria"
-release = __version__
+release = version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
