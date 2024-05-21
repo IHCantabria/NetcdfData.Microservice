@@ -1,3 +1,5 @@
+from . import __version__
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -9,7 +11,7 @@
 project = "NetcdfData Microservice"
 copyright = "2024, IHCantabria"
 author = "IHCantabria"
-release = "0.3.0"
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
