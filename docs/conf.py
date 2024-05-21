@@ -10,7 +10,7 @@ import toml
 
 # Read version from pyproject.toml
 
-with open("pyproject.toml") as f:
+with open("../pyproject.toml") as f:
     config = toml.load(f)
 
 version = config["project"]["version"]
