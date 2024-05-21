@@ -67,6 +67,12 @@ import os
 
 os.system("git add pyproject.toml")
 
+os.system("git commit -m 'Bump version to {0}'".format(version))
+
 os.system("git tag -a {0} -m 'Version {0}'".format(version))
 
-os.system("git push origin main")
+os.system("git push --tags")
+
+os.system("git push")
+
+
