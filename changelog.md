@@ -1,3 +1,7 @@
+** v0.3.5
+
+- Se añade el despliegue automático de tags en github.
+
 ** v0.3.0
 
 - Configuración para los despliegues en distintos entornos.
