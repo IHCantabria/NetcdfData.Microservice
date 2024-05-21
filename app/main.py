@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from app.api.netcdfs import router as netcdf
+from . import __version__
 
 app = FastAPI()
 
@@ -9,7 +10,7 @@ def custom_openapi():
         return app.openapi_schema
     openapi_schema = get_openapi(
         title="Netcdf data",
-        version="0.1.0",
+        version= __version__,
         description="Acces data from netcdf files",
         routes=app.routes,
     )
