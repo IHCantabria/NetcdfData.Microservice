@@ -68,7 +68,7 @@ if os.system("git diff-index --quiet HEAD --") != 0:
 
 config["project"]["version"] = version
 
-with open("pyproject.toml", "w") as f:
+with open("../pyproject.toml", "w") as f:
     toml.dump(config, f)
 
 os.system("git add pyproject.toml")
