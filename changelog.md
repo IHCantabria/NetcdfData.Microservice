@@ -1,4 +1,4 @@
-** v0.3.5
+** v0.3.6
 
 - Se añade el despliegue automático de tags en github.
 
