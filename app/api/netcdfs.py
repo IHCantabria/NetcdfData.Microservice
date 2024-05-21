@@ -6,6 +6,9 @@ from app.processing.netcdfs_processing import get_netcdf_from_area as get_netcdf
 from app.processing.netcdfs_processing import get_netcdf_from_mask as get_netcdf_mask
 import requests
 from requests.models import Response
+import os
+
+datahub_url_base = os.getenv("DATAHUB_URL_BASE")
 
 
 router = APIRouter()
@@ -27,7 +30,7 @@ def get_netcdf_from_point(
     Returns:
         _type_: Netcdf file
     """
-    product = requests.get("https://datahubdes.ihcantabria.com/v1/private/NetcdfMicroservice/Products?id={0}".format(product_id)).json()
+    product = requests.get("{0}/v1/private/NetcdfMicroservice/Products?id={1}".format(datahub_url_base, product_id)).json()
     path = product[0]["physicalPath"]
     if path != None:
         ds = get_netcdf_point(longitude, latitude, path, start_date, end_date)
@@ -65,7 +68,7 @@ def get_netcdf_from_area(
     Returns:
         _type_: Netcdf file
     """
-    product = requests.get("https://datahubdes.ihcantabria.com/v1/private/NetcdfMicroservice/Products?id={0}".format(product_id)).json()
+    product = requests.get("{0}/v1/private/NetcdfMicroservice/Products?id={1}".format(datahub_url_base, product_id)).json()
     path = product[0]["physicalPath"]
     if path != None:
         ds = get_netcdf_area(longitude_min, longitude_max, latitude_min, latitude_max, path, start_date, end_date)
@@ -99,7 +102,7 @@ def get_netcdf_from_mask(
     Returns:
         _type_: xarray dataset
     """
-    product = requests.get("https://datahubdes.ihcantabria.com/v1/private/NetcdfMicroservice/Products?id={0}".format(product_id)).json()
+    product = requests.get("{0}/v1/private/NetcdfMicroservice/Products?id={1}".format(datahub_url_base, product_id)).json()
     path = product[0]["physicalPath"]
     if path != None:
         ds = get_netcdf_mask(filepath_mask, path, row_ID, start_date, end_date)

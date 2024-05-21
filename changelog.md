@@ -1,3 +1,7 @@
+** v0.3.0
+
+- Configuración para los despliegues en distintos entornos.
+
 ** v0.2.0
 
 - Se añade el recorte por area.
