@@ -71,7 +71,7 @@ os.system("git commit -m 'Bump version to {0}'".format(version))
 
 os.system("git tag -a {0} -m 'Version {0}'".format(version))
 
-os.system("git push --tags")
+os.system("git push origin tag {0}".format(version))
 
 os.system("git push")
 
