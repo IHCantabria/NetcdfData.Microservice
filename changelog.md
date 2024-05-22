@@ -1,3 +1,7 @@
+** v0.3.7
+
+- Se comprueba que pasen los tests en el despliegue automático.
+
 ** v0.3.6
 
 - Se añade el despliegue automático de tags en github.
