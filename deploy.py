@@ -82,5 +82,3 @@ os.system("git tag -a {0} -m 'Version {0}'".format(version))
 os.system("git push origin tag {0}".format(version))
 
 os.system("git push")
-
-
