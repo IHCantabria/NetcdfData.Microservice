@@ -64,6 +64,12 @@ if os.system("git diff-index --quiet HEAD --") != 0:
     print("There are changes in the repository. Please commit them before deploying.")
     exit(1)
 
+# Run tests
+
+if os.system("pytest") != 0:
+    print("Tests failed. Please fix them before deploying.")
+    exit(1)
+
 # Write new version to pyproject.toml
 
 config["project"]["version"] = version
