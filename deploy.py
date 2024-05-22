@@ -71,6 +71,8 @@ config["project"]["version"] = version
 with open("pyproject.toml", "w") as f:
     toml.dump(config, f)
 
+# Commit changes and create a new tag
+
 os.system("git add pyproject.toml")
 
 os.system("git commit -m 'Bump version to {0}'".format(version))
