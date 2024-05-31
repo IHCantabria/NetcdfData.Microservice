@@ -1,3 +1,7 @@
+** v0.3.8
+
+- Recorte de variables opcionales en la petición.
+
 ** v0.3.7
 
 - Se comprueba que pasen los tests en el despliegue automático.
