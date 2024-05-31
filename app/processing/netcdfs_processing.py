@@ -5,7 +5,7 @@ from shapely.geometry import mapping
 import fiona
 
 
-def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str, end_date: str):
+def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str = None, end_date: str = None):
     """_summary_
     
     Args:
@@ -29,16 +29,18 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
     except:
         pass
-    try :
-        ds = ds.sel(time=slice(start_date, end_date))
-    except :
-        pass
+
+    if start_date != None or end_date != None :
+        try :
+            ds = ds.sel(time=slice(start_date, end_date))
+        except :
+            pass
     ds = ds.sel(longitude=longitude, latitude=latitude, method="nearest")
     return ds
 
 
 
-def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str, end_date: str):
+def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str = None, end_date: str = None):
     """_summary_
     
     Args:
@@ -63,10 +65,11 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
     except:
         pass
-    try:
-        ds = ds.sel(time=slice(start_date, end_date))
-    except:
-        pass
+    if start_date != None or end_date != None :
+        try:
+            ds = ds.sel(time=slice(start_date, end_date))
+        except:
+            pass
     mask_lon = (ds.longitude >= longitude_min) & (ds.longitude <= longitude_max)
     mask_lat = (ds.latitude >= latitude_min) & (ds.latitude <= latitude_max)
     ds = ds.where(mask_lon & mask_lat, drop=True)
@@ -107,8 +110,9 @@ def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_d
     mask_lon = (ds.longitude >= float(mask["MIN_X"].iloc[0])) & (ds.longitude <= float(mask["MAX_X"].iloc[0]))
     mask_lat = (ds.latitude > float(mask["MIN_Y"].iloc[0])) & (ds.latitude < float(mask["MAX_Y"].iloc[0]))
     ds = ds.where(mask_lon & mask_lat, drop=True)
-    try:
-        ds = ds.sel(time=slice(start_date, end_date))
-    except:
-        pass
+    if start_date != None or end_date != None :
+        try:
+            ds = ds.sel(time=slice(start_date, end_date))
+        except:
+            pass
     return ds
