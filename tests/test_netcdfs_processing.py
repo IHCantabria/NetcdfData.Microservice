@@ -9,6 +9,7 @@ start_date = "2023-01-08"
 end_date = "2023-01-11"
 start_date_no_date = None
 end_date_no_date = None
+variables = ["sea_water_salinity", "sea_surface_height_above_sea_level"]
 
 def test_get_netcdf_from_point_single_file():
     path = "tests/data/get_data_from_point_single_file/"
@@ -36,10 +37,36 @@ def test_get_netcdf_from_point_single_file_no_date():
     assert ds["sea_surface_height_above_sea_level"].values[94] == pytest.approx(-1355 * 0.001)
     assert ds["sea_water_salinity"].values[94] == pytest.approx(10521 * 0.001 + 20)
 
+def test_get_netcdf_from_point_single_file_no_date_variables():
+    path = "tests/data/get_data_from_point_single_file/"
+    ds = get_netcdf_from_point(
+        longitude, latitude, path, start_date_no_date, end_date_no_date, variables
+    )
+    assert ds.dims["time"] == 95
+    assert ds["sea_surface_height_above_sea_level"].values[0] == pytest.approx(-327 * 0.001)
+    assert ds["sea_water_salinity"].values[0] == pytest.approx(10701 * 0.001 + 20)
+    assert ds["sea_surface_height_above_sea_level"].values[8] == pytest.approx(-842 * 0.001)
+    assert ds["sea_water_salinity"].values[8] == pytest.approx(10653 * 0.001 + 20)
+    assert ds["sea_surface_height_above_sea_level"].values[94] == pytest.approx(-1355 * 0.001)
+    assert ds["sea_water_salinity"].values[94] == pytest.approx(10521 * 0.001 + 20)
+
 def test_get_netcdf_from_point_multiple_files():
     path = "tests/data/get_data_from_point_multiple_files/"
     ds = get_netcdf_from_point(
         longitude, latitude, path, start_date, end_date
+    )
+    assert ds.dims["time"] == 95
+    assert ds["sea_surface_height_above_sea_level"].values[0] == pytest.approx(-327 * 0.001)
+    assert ds["sea_water_salinity"].values[0] == pytest.approx(10701 * 0.001 + 20)
+    assert ds["sea_surface_height_above_sea_level"].values[8] == pytest.approx(-842 * 0.001)
+    assert ds["sea_water_salinity"].values[8] == pytest.approx(10653 * 0.001 + 20)
+    assert ds["sea_surface_height_above_sea_level"].values[94] == pytest.approx(-1355 * 0.001)
+    assert ds["sea_water_salinity"].values[94] == pytest.approx(10521 * 0.001 + 20)
+
+def test_get_netcdf_from_point_multiple_files_variables():
+    path = "tests/data/get_data_from_point_multiple_files/"
+    ds = get_netcdf_from_point(
+        longitude, latitude, path, start_date, end_date, variables
     )
     assert ds.dims["time"] == 95
     assert ds["sea_surface_height_above_sea_level"].values[0] == pytest.approx(-327 * 0.001)
