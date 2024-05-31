@@ -5,7 +5,7 @@ from shapely.geometry import mapping
 import fiona
 
 
-def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str = None, end_date: str = None):
+def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str = None, end_date: str = None, variables: list = None):
     """_summary_
     
     Args:
@@ -30,17 +30,21 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
     except:
         pass
 
+    if variables != None :
+        ds = ds[variables]
+
     if start_date != None or end_date != None :
         try :
             ds = ds.sel(time=slice(start_date, end_date))
         except :
             pass
+
     ds = ds.sel(longitude=longitude, latitude=latitude, method="nearest")
     return ds
 
 
 
-def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str = None, end_date: str = None):
+def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str = None, end_date: str = None, variables: list = None):
     """_summary_
     
     Args:
@@ -65,6 +69,10 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
     except:
         pass
+
+    if variables != None :
+        ds = ds[variables]
+
     if start_date != None or end_date != None :
         try:
             ds = ds.sel(time=slice(start_date, end_date))
@@ -76,7 +84,7 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
     return ds
 
 
-def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_date = None, end_date = None) :
+def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_date = None, end_date = None, variables: list = None) :
     """_summary_
     
     Args:
@@ -103,6 +111,8 @@ def get_netcdf_from_mask(filepath_mask : str, path : str, row_ID = None, start_d
         ds = ds.rename({"lat" : "latitude", "lon" : "longitude"})
     except :
         pass
+    if variables != None :
+        ds = ds[variables]
     print(mask)
     ds.rio.set_spatial_dims(x_dim="longitude", y_dim="latitude", inplace=True)
     ds.rio.write_crs("epsg:4326", inplace=True)
