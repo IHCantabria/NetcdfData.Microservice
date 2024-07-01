@@ -5,7 +5,7 @@ from shapely.geometry import mapping
 import fiona
 
 
-def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str = None, end_date: str = None, variables: list = None):
+def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_date: str = None, end_date: str = None, variables: list = []):
     """_summary_
     
     Args:
@@ -30,13 +30,13 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
     except:
         pass
 
-    if variables != None :
+    if variables != [] :
         ds = ds[variables]
 
     if start_date != None or end_date != None :
         try :
             ds = ds.sel(time=slice(start_date, end_date))
-        except :
+        except Exception as e:
             pass
 
     ds = ds.sel(longitude=longitude, latitude=latitude, method="nearest")
@@ -44,7 +44,7 @@ def get_netcdf_from_point(longitude: float, latitude: float, path : str, start_d
 
 
 
-def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str = None, end_date: str = None, variables: list = None):
+def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_min: float, latitude_max : float, path: str, start_date: str = None, end_date: str = None, variables: list = []):
     """_summary_
     
     Args:
@@ -70,7 +70,7 @@ def get_netcdf_from_area(longitude_min: float, longitude_max : float, latitude_m
     except:
         pass
 
-    if variables != None :
+    if variables != [] :
         ds = ds[variables]
 
     if start_date != None or end_date != None :

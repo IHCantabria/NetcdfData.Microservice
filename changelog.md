@@ -1,3 +1,7 @@
+** v0.3.9
+
+- Corregido recorte de variables.
+
 ** v0.3.8
 
 - Recorte de variables opcionales en la petición.
