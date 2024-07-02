@@ -72,6 +72,8 @@ if os.system("pytest") != 0:
 
 # Write new version to pyproject.toml
 
+version = "v" + version
+
 config["project"]["version"] = version
 
 with open("pyproject.toml", "w") as f:
