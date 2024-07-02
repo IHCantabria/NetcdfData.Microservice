@@ -1,3 +1,7 @@
+** v0.3.10
+
+- Añadida la v delante de la versión para homogeneizar con el resto de aplicaciones.
+
 ** v0.3.9
 
 - Corregido recorte de variables.
